@@ -1,72 +1,93 @@
+
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { MapPin } from "lucide-react";
+
 
 const BrowseListings = () => {
-  const [roommates, setRoommates] = useState([]);
-  const [searchText, setSearchText] = useState("");
+  const [listings, setListings] = useState([]);
+  const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
   const limit = 6;
 
-  const fetchData = async () => {
-  try {
-    const res = await fetch(
-      `http://localhost:3000/roommates?search=${searchText}&page=${page}&limit=${limit}`
-    );
-    const data = await res.json();
-    setRoommates(data.result || []); // safe fallback
-    setTotal(data.total || 0);
-  } catch (error) {
-    console.error("Fetch Error:", error);
-    setRoommates([]);
-    setTotal(0);
-  }
-};
-
-
   useEffect(() => {
-    fetchData();
-  }, [page]);
+    fetch(`http://localhost:3000/roommates?search=${search}&page=${page}&limit=${limit}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setListings(data.result || []);
+        const total = data.total || data.result?.length || 0;
+        setTotalPages(Math.ceil(total / limit));
+      });
+  }, [search, page]);
 
   const handleSearch = (e) => {
     e.preventDefault();
     setPage(1);
-    fetchData();
   };
 
-  const totalPages = Math.ceil(total / limit);
-
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <form onSubmit={handleSearch} className="flex mb-6">
+    <div className="px-4 py-10 max-w-6xl mx-auto">
+      <h2 className="text-3xl font-bold mb-6 text-center">Browse Listings</h2>
+
+      <form onSubmit={handleSearch} className="mb-6 flex justify-center">
         <input
           type="text"
-          placeholder="Search by title / location / name"
-          className="input input-bordered w-full max-w-xs"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="Search by title, location, or name"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border px-4 py-2 rounded-l-md w-72"
         />
-        <button type="submit" className="btn btn-primary ml-2">Search</button>
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-r-md">Search</button>
       </form>
 
-      <div className="grid md:grid-cols-2 gap-4">
-        {Array.isArray(roommates) && roommates.map(roommate => (
-          <div key={roommate._id} className="card shadow-lg p-4 border rounded-xl">
-            <h2 className="text-xl font-bold">{roommate.title}</h2>
-            <p><strong>Location:</strong> {roommate.location}</p>
-            <p><strong>Rent:</strong> {roommate.rent} ৳</p>
+
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {listings.map((item) => (
+          <div
+            key={item._id}
+            className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 border"
+          >
+            {/* Image Section */}
+            <div className="relative">
+              <img
+                src={item.image || 'https://via.placeholder.com/400x200?text=No+Image'}
+                alt={item.title}
+                className="w-full h-52 object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-white">
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <p className="text-sm">{item.location}</p>
+              </div>
+            </div>
+
+            {/* Content Section */}
+            <div className="p-4">
+              <p className="text-gray-700 text-sm mb-3">
+                {item.description?.slice(0, 80)}...
+              </p>
+
+              <Link to={`/roommates/${item._id}`}>
+                <button className="w-full mt-2 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-lg font-medium hover:scale-105 transition transform duration-300">
+                  See Details
+                </button>
+              </Link>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Pagination Buttons */}
-      <div className="flex justify-center mt-6 space-x-2">
-        {Array.from({ length: totalPages }, (_, i) => (
+
+      {/* Pagination */}
+      <div className="flex justify-center mt-6 gap-2">
+        {[...Array(totalPages)].map((_, idx) => (
           <button
-            key={i + 1}
-            className={`btn ${page === i + 1 ? 'btn-primary' : 'btn-outline'}`}
-            onClick={() => setPage(i + 1)}
+            key={idx}
+            onClick={() => setPage(idx + 1)}
+            className={`px-3 py-1 border ${page === idx + 1 ? 'bg-blue-500 text-white' : ''}`}
           >
-            {i + 1}
+            {idx + 1}
           </button>
         ))}
       </div>
