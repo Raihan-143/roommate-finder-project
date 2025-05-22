@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
 import { Fade } from "react-awesome-reveal";
 import Lottie from "lottie-react";
-import noDataAnimation from '../assets/lottie/no-data.json'
+import noDataAnimation from '../assets/lottie/no-data.json';
 
 const BrowseListings = () => {
   const [listings, setListings] = useState([]);
@@ -43,7 +43,9 @@ const BrowseListings = () => {
 
   return (
     <div className="px-4 py-10 max-w-6xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6 text-center">Browse Listings</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800 dark:text-white">
+        Browse Listings
+      </h2>
 
       <form onSubmit={handleSearch} className="mb-6 flex justify-center">
         <input
@@ -51,11 +53,11 @@ const BrowseListings = () => {
           placeholder="Search by title, location, or name"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border px-4 py-2 rounded-l-md w-72"
+          className="border px-4 py-2 rounded-l-md w-72 text-gray-800 dark:text-white bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 placeholder-gray-400 dark:placeholder-gray-500"
         />
         <button
           type="submit"
-          className="bg-indigo-700 text-white px-4 py-2 rounded-r-md"
+          className="bg-indigo-700 text-white px-4 py-2 rounded-r-md hover:bg-indigo-800 disabled:opacity-50"
           disabled={loading}
         >
           {loading ? "Searching..." : "Search"}
@@ -63,7 +65,9 @@ const BrowseListings = () => {
       </form>
 
       {loading ? (
-        <p className="text-center text-gray-500">Loading listings...</p>
+        <p className="text-center text-gray-500 dark:text-gray-400">
+          Loading listings...
+        </p>
       ) : listings.length === 0 ? (
         <div className="flex flex-col items-center justify-center mt-10">
           <div className="w-60 h-60">
@@ -76,7 +80,7 @@ const BrowseListings = () => {
             {listings.map((item) => (
               <div
                 key={item._id}
-                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1 hover:scale-105"
+                className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1 hover:scale-105"
               >
                 {/* Image Section */}
                 <div className="relative">
@@ -99,7 +103,7 @@ const BrowseListings = () => {
 
                 {/* Content Section */}
                 <div className="p-4">
-                  <p className="text-gray-700 text-sm mb-3">
+                  <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
                     {item.description?.slice(0, 80)}...
                   </p>
 
@@ -121,8 +125,11 @@ const BrowseListings = () => {
           <button
             key={idx}
             onClick={() => setPage(idx + 1)}
-            className={`px-3 py-1 border rounded ${page === idx + 1 ? "bg-blue-500 text-white" : ""
-              }`}
+            className={`px-3 py-1 border rounded ${
+              page === idx + 1
+                ? "bg-blue-500 text-white"
+                : "bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600"
+            }`}
             disabled={loading}
           >
             {idx + 1}

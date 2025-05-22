@@ -56,60 +56,59 @@ const RoomMateDetails = () => {
 
   if (loading) {
     return (
-      <div className="text-center mt-20 text-xl text-gray-600 font-semibold">
+      <div className="text-center mt-20 text-xl text-gray-600 font-semibold dark:text-gray-300">
         Loading roommate details...
       </div>
     );
   }
 
   return (
-   <div className="max-w-5xl mx-auto mt-10 bg-white shadow-2xl rounded-3xl overflow-hidden">
-  <div className="grid md:grid-cols-2">
-    <img
-      src={roommate.image || 'https://via.placeholder.com/600x400?text=No+Image'}
-      alt={roommate.title}
-      className="w-full h-full object-cover"
-    />
+    <div className="max-w-5xl mx-auto mt-10 bg-white shadow-2xl rounded-3xl overflow-hidden dark:bg-gray-900 dark:shadow-gray-800">
+      <div className="grid md:grid-cols-2">
+        <img
+          src={roommate.image || 'https://via.placeholder.com/600x400?text=No+Image'}
+          alt={roommate.title}
+          className="w-full h-full object-cover"
+        />
 
-    <div className="p-8 flex flex-col justify-between">
-      <div>
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">{roommate.title}</h2>
+        <div className="p-8 flex flex-col justify-between">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4 dark:text-white">{roommate.title}</h2>
 
-        <ul className="space-y-2 text-gray-700 text-[17px] font-medium">
-          <li>📍 <strong>Location:</strong> {roommate.location}</li>
-          <li>💸 <strong>Rent:</strong> {roommate.rent} ৳</li>
-          <li>📞 <strong>Contact:</strong> {roommate.contact}</li>
-        </ul>
+            <ul className="space-y-2 text-gray-700 text-[17px] font-medium dark:text-gray-300">
+              <li>📍 <strong>Location:</strong> {roommate.location}</li>
+              <li>💸 <strong>Rent:</strong> {roommate.rent} ৳</li>
+              <li>📞 <strong>Contact:</strong> {roommate.contact}</li>
+            </ul>
 
-        <div className="mt-4 text-gray-700 text-base leading-relaxed">
-          <p><strong>📝 Description:</strong></p>
-          <p>{roommate.description || "No description provided."}</p>
+            <div className="mt-4 text-gray-700 text-base leading-relaxed dark:text-gray-300">
+              <p><strong>📝 Description:</strong></p>
+              <p>{roommate.description || "No description provided."}</p>
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div>
+              <button
+                onClick={handleLike}
+                className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-lg transition duration-300 shadow cursor-pointer"
+              >
+                ❤️ Like
+              </button>
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                Total Likes: <strong>{roommate?.likes?.length || 0}</strong>
+              </p>
+            </div>
+
+            <Link to="/browse">
+              <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg transition duration-300 shadow cursor-pointer">
+                🔙 Back to Browse
+              </button>
+            </Link>
+          </div>
         </div>
-      </div>
-
-      <div className="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div>
-          <button
-            onClick={handleLike}
-            className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-lg transition duration-300 shadow cursor-pointer"
-          >
-            ❤️ Like
-          </button>
-          <p className="mt-2 text-sm text-gray-600">
-            Total Likes: <strong>{roommate?.likes?.length || 0}</strong>
-          </p>
-        </div>
-
-        <Link to="/browse">
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg transition duration-300 shadow cursor-pointer">
-            🔙 Back to Browse
-          </button>
-        </Link>
       </div>
     </div>
-  </div>
-</div>
-
   );
 };
 

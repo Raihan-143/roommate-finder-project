@@ -15,7 +15,6 @@ const MyListings = () => {
       fetch(`http://localhost:3000/myroommates/user?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log("Fetched listings:", data);
           setListings(data);
           setLoading(false);
         })
@@ -57,7 +56,7 @@ const MyListings = () => {
 
   if (!user?.email) {
     return (
-      <div className="text-center mt-20 text-xl text-red-600 font-semibold">
+      <div className="text-center mt-20 text-xl text-red-600 dark:text-red-400 font-semibold">
         Please login to view your listings.
       </div>
     );
@@ -65,7 +64,7 @@ const MyListings = () => {
 
   if (loading) {
     return (
-      <div className="text-center mt-20 text-lg text-gray-500 font-medium">
+      <div className="text-center mt-20 text-lg text-gray-500 dark:text-gray-400 font-medium">
         Loading your listings...
       </div>
     );
@@ -73,7 +72,7 @@ const MyListings = () => {
 
   if (listings.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center mt-20 text-lg text-gray-500 font-medium">
+      <div className="flex flex-col items-center justify-center mt-20 text-lg text-gray-500 dark:text-gray-400 font-medium">
         <p className="mb-4">You have not added any roommate listings yet.</p>
         <div className="w-64">
           <Lottie animationData={noListData} loop={true} />
@@ -84,25 +83,28 @@ const MyListings = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
-      <h1 className="text-4xl font-extrabold mb-10 text-center text-blue-700">
+      <h1 className="text-4xl font-extrabold mb-10 text-center text-blue-700 dark:text-blue-400">
         My Given Roommate Listings
       </h1>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {listings.map((item) => (
           <div
             key={item._id}
-            className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col justify-between"
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col justify-between"
           >
             <div>
-              <h2 className="text-2xl font-semibold mb-3 text-gray-800">{item.title}</h2>
-              <p className="text-gray-600 mb-1">
+              <h2 className="text-2xl font-semibold mb-3 text-gray-800 dark:text-white">
+                {item.title}
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-1">
                 <span className="font-medium">Location:</span> {item.location}
               </p>
-              <p className="text-gray-600 mb-1">
+              <p className="text-gray-600 dark:text-gray-300 mb-1">
                 <span className="font-medium">Rent:</span> {item.rent}৳
               </p>
-              <p className="text-gray-600 mt-3 text-sm line-clamp-3">
-               <span className="font-medium">Description:</span> {item.description || "No description provided."}
+              <p className="text-gray-600 dark:text-gray-300 mt-3 text-sm line-clamp-3">
+                <span className="font-medium">Description:</span>{" "}
+                {item.description || "No description provided."}
               </p>
             </div>
             <div className="flex justify-between mt-6">
@@ -113,7 +115,7 @@ const MyListings = () => {
               </Link>
               <button
                 onClick={() => handleDelete(item._id)}
-                className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition-colors duration-300 shadow-md cursor-po cursor-pointer"
+                className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition-colors duration-300 shadow-md cursor-pointer"
               >
                 Delete
               </button>

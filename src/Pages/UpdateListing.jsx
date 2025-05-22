@@ -50,8 +50,7 @@ const UpdateListing = () => {
 
   if (loading) {
     return (
-      <div className="text-center mt-10 text-lg text-gray-600">
-        {/* Spinner */}
+      <div className="text-center mt-10 text-lg text-gray-600 dark:text-gray-300">
         <svg
           className="animate-spin h-8 w-8 mx-auto text-green-600"
           xmlns="http://www.w3.org/2000/svg"
@@ -77,58 +76,57 @@ const UpdateListing = () => {
     );
   }
 
-  if (!listing) return <p className="text-center py-10">Listing not found.</p>;
+  if (!listing) return <p className="text-center py-10 dark:text-gray-300">Listing not found.</p>;
 
   return (
-    <div className="max-w-2xl mx-auto p-8 bg-white rounded-xl shadow-lg mt-2">
-  <h1 className="text-3xl font-extrabold mb-8 text-center text-green-700">
-    Update Your Listing
-  </h1>
-  <form onSubmit={handleUpdate} className="space-y-6">
-    <label className="label">Ttile</label>
-    <input
-      type="text"
-      name="title"
-      defaultValue={listing.title}
-      placeholder="Enter Title"
-      className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-      required
-    />
-    <label className="label">Location</label>
-    <input
-      type="text"
-      name="location"
-      defaultValue={listing.location}
-      placeholder="Enter Location"
-      className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-      required
-    />
-    <label className="label">Rent</label>
-    <input
-      type="number"
-      name="rent"
-      defaultValue={listing.rent}
-      placeholder="Enter Rent (৳)"
-      className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-      required
-    />
-    <label className="label">Description</label>
-    <textarea
-      name="description"
-      defaultValue={listing.description}
-      placeholder="Enter Description"
-      className="w-full border border-gray-300 rounded-lg p-3 h-32 resize-none focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-      required
-    />
-    <button
-      type="submit"
-      className="w-full bg-green-600 text-white rounded-lg py-3 font-semibold hover:bg-green-700 shadow-lg transition duration-300 cursor-pointer"
-    >
-      Update
-    </button>
-  </form>
-</div>
-
+    <div className="max-w-2xl mx-auto p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg mt-2">
+      <h1 className="text-3xl font-extrabold mb-8 text-center text-green-700 dark:text-green-400">
+        Update Your Listing
+      </h1>
+      <form onSubmit={handleUpdate} className="space-y-6">
+        <label className="label dark:text-gray-300">Title</label>
+        <input
+          type="text"
+          name="title"
+          defaultValue={listing.title}
+          placeholder="Enter Title"
+          className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+          required
+        />
+        <label className="label dark:text-gray-300">Location</label>
+        <input
+          type="text"
+          name="location"
+          defaultValue={listing.location}
+          placeholder="Enter Location"
+          className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+          required
+        />
+        <label className="label dark:text-gray-300">Rent</label>
+        <input
+          type="number"
+          name="rent"
+          defaultValue={listing.rent}
+          placeholder="Enter Rent (৳)"
+          className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+          required
+        />
+        <label className="label dark:text-gray-300">Description</label>
+        <textarea
+          name="description"
+          defaultValue={listing.description}
+          placeholder="Enter Description"
+          className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg p-3 h-32 resize-none focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+          required
+        />
+        <button
+          type="submit"
+          className="w-full bg-green-600 text-white rounded-lg py-3 font-semibold hover:bg-green-700 shadow-lg transition duration-300 cursor-pointer"
+        >
+          Update
+        </button>
+      </form>
+    </div>
   );
 };
 
