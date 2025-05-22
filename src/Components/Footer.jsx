@@ -10,7 +10,17 @@ const Footer = () => {
     <footer className="bg-indigo-50 dark:bg-gray-900 text-gray-700 dark:text-white py-10 mt-16">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
         <div>
-          <h2 className="text-2xl font-bold text-indigo-700 dark:text-white">RoomMateFinder</h2>
+          {/* ✅ Logo + Text updated here only */}
+          <div className="flex items-center justify-center md:justify-start">
+            <img
+              src="/match.png"
+              alt="logo"
+              className="h-8 w-8 mr-2"
+            />
+            <h2 className="text-2xl font-bold text-indigo-700 dark:text-white">
+              RoomMate<span className="text-rose-500">Finder</span>
+            </h2>
+          </div>
           <p className="mt-2 text-sm">
             Making roommate finding easier, safer, and friendlier than ever before.
           </p>
