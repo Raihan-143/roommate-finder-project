@@ -63,49 +63,53 @@ const RoomMateDetails = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto mt-12 px-6 py-10 bg-white rounded-2xl shadow-lg">
-      <img
-        src={roommate.image || 'https://via.placeholder.com/600x300?text=No+Image'}
-        alt={roommate.title}
-        className="w-full h-[300px] object-cover rounded-xl shadow-md"
-      />
+   <div className="max-w-5xl mx-auto mt-10 bg-white shadow-2xl rounded-3xl overflow-hidden">
+  <div className="grid md:grid-cols-2">
+    <img
+      src={roommate.image || 'https://via.placeholder.com/600x400?text=No+Image'}
+      alt={roommate.title}
+      className="w-full h-full object-cover"
+    />
 
-      <div className="mt-8">
+    <div className="p-8 flex flex-col justify-between">
+      <div>
         <h2 className="text-3xl font-bold text-gray-800 mb-4">{roommate.title}</h2>
-        <div className="space-y-2 text-gray-700 text-lg">
-          <p><strong>📍 Location:</strong> {roommate.location}</p>
-          <p><strong>💸 Rent:</strong> {roommate.rent} ৳</p>
-          <p><strong>📞 Contact:</strong> {roommate.contact}</p>
-        </div>
 
-        <div className="mt-6">
-          <p className="text-gray-700 leading-relaxed">
-            <strong>Description:</strong><br />
-            {roommate.description || "No description provided."}
+        <ul className="space-y-2 text-gray-700 text-[17px] font-medium">
+          <li>📍 <strong>Location:</strong> {roommate.location}</li>
+          <li>💸 <strong>Rent:</strong> {roommate.rent} ৳</li>
+          <li>📞 <strong>Contact:</strong> {roommate.contact}</li>
+        </ul>
+
+        <div className="mt-4 text-gray-700 text-base leading-relaxed">
+          <p><strong>📝 Description:</strong></p>
+          <p>{roommate.description || "No description provided."}</p>
+        </div>
+      </div>
+
+      <div className="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <button
+            onClick={handleLike}
+            className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-lg transition duration-300 shadow"
+          >
+            ❤️ Like
+          </button>
+          <p className="mt-2 text-sm text-gray-600">
+            Total Likes: <strong>{roommate?.likes?.length || 0}</strong>
           </p>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <button
-              onClick={handleLike}
-              className="bg-rose-500 hover:bg-rose-600 text-white px-5 py-2 rounded-lg transition duration-300 shadow"
-            >
-              ❤️ Like
-            </button>
-            <p className="mt-2 text-sm text-gray-600">
-              Total Likes: <strong>{roommate?.likes?.length || 0}</strong>
-            </p>
-          </div>
-
-          <Link to="/browse">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition duration-300 shadow">
-              🔍 Back to Browse
-            </button>
-          </Link>
-        </div>
+        <Link to="/browse">
+          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg transition duration-300 shadow">
+            🔙 Back to Browse
+          </button>
+        </Link>
       </div>
     </div>
+  </div>
+</div>
+
   );
 };
 
