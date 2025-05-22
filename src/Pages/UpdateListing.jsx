@@ -80,11 +80,12 @@ const UpdateListing = () => {
   if (!listing) return <p className="text-center py-10">Listing not found.</p>;
 
   return (
-    <div className="max-w-2xl mx-auto p-8 bg-white rounded-xl shadow-lg mt-10">
+    <div className="max-w-2xl mx-auto p-8 bg-white rounded-xl shadow-lg mt-2">
   <h1 className="text-3xl font-extrabold mb-8 text-center text-green-700">
     Update Your Listing
   </h1>
   <form onSubmit={handleUpdate} className="space-y-6">
+    <label className="label">Ttile</label>
     <input
       type="text"
       name="title"
@@ -93,6 +94,7 @@ const UpdateListing = () => {
       className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
       required
     />
+    <label className="label">Location</label>
     <input
       type="text"
       name="location"
@@ -101,6 +103,7 @@ const UpdateListing = () => {
       className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
       required
     />
+    <label className="label">Rent</label>
     <input
       type="number"
       name="rent"
@@ -109,6 +112,7 @@ const UpdateListing = () => {
       className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
       required
     />
+    <label className="label">Description</label>
     <textarea
       name="description"
       defaultValue={listing.description}
