@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../Contexts/AuthContext';
 import { Menu, X } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -13,32 +14,43 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-white dark:bg-black shadow-md sticky top-0 z-50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-blue-600">RoommateFinder</Link>
+        <Link to="/" className="text-2xl font-bold text-indigo-700 dark:text-white">
+          RoommateFinder
+        </Link>
 
-        {/* Center Links (only in desktop) */}
-        <div className="hidden md:flex flex-1 justify-center space-x-6 text-gray-700 font-medium">
-          <Link to="/" className="hover:text-blue-600">Home</Link>
-          <Link to="/browse" className="hover:text-blue-600">Browse</Link>
+        {/* Center Links (desktop only) */}
+        <div className="hidden md:flex flex-1 justify-center space-x-6 text-gray-700 dark:text-gray-200 font-medium">
+          <Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
+          <Link to="/browse" className="hover:text-blue-600 dark:hover:text-blue-400">Browse</Link>
           {user && (
             <>
-              <Link to="/add" className="hover:text-blue-600">Add</Link>
-              <Link to="/my-listings" className="hover:text-blue-600">My Listings</Link>
+              <Link to="/add" className="hover:text-blue-600 dark:hover:text-blue-400">Add</Link>
+              <Link to="/my-listings" className="hover:text-blue-600 dark:hover:text-blue-400">My Listings</Link>
             </>
           )}
         </div>
 
-        {/* Right Buttons (desktop only) */}
-        <div className="hidden md:flex items-center space-x-2">
+        {/* Right Side Buttons (desktop only) */}
+        <div className="hidden md:flex items-center space-x-4">
+          <ThemeToggle /> {/* ✅ Dark/Light Toggle */}
           {user ? (
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-lg"
-            >
-              Logout
-            </button>
+            <>
+              <img
+                src={user.photoURL || '/default-avatar.png'}
+                alt="Profile"
+                className="w-9 h-9 rounded-full object-cover border-2 border-blue-500"
+                title={user.displayName || 'User'}
+              />
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-lg"
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <>
               <Link to="/login">
@@ -51,10 +63,10 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Hamburger */}
+        {/* Mobile Hamburger Button */}
         <div className="md:hidden">
           <button onClick={() => setDrawerOpen(true)}>
-            <Menu size={28} />
+            <Menu size={28} className="text-gray-700 dark:text-gray-100" />
           </button>
         </div>
       </div>
@@ -69,34 +81,45 @@ const Navbar = () => {
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full w-64 bg-white dark:bg-black shadow-lg z-50 transform transition-transform duration-300 ${
           drawerOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="p-4 flex justify-between items-center border-b">
-          <h2 className="text-lg font-semibold text-blue-600">Menu</h2>
+        <div className="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
+          <h2 className="text-lg font-semibold text-blue-600 dark:text-blue-400">Menu</h2>
           <button onClick={() => setDrawerOpen(false)}>
-            <X size={24} />
+            <X size={24} className="text-gray-700 dark:text-gray-200" />
           </button>
         </div>
 
-        <div className="p-4 space-y-3 text-gray-700 font-medium">
-          <Link to="/" onClick={() => setDrawerOpen(false)} className="block hover:text-blue-600">Home</Link>
-          <Link to="/browse" onClick={() => setDrawerOpen(false)} className="block hover:text-blue-600">Browse</Link>
+        <div className="p-4 space-y-3 text-gray-700 dark:text-gray-200 font-medium">
+          <Link to="/" onClick={() => setDrawerOpen(false)} className="block hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
+          <Link to="/browse" onClick={() => setDrawerOpen(false)} className="block hover:text-blue-600 dark:hover:text-blue-400">Browse</Link>
           {user && (
             <>
-              <Link to="/add" onClick={() => setDrawerOpen(false)} className="block hover:text-blue-600">Add</Link>
-              <Link to="/my-listings" onClick={() => setDrawerOpen(false)} className="block hover:text-blue-600">My Listings</Link>
+              <Link to="/add" onClick={() => setDrawerOpen(false)} className="block hover:text-blue-600 dark:hover:text-blue-400">Add</Link>
+              <Link to="/my-listings" onClick={() => setDrawerOpen(false)} className="block hover:text-blue-600 dark:hover:text-blue-400">My Listings</Link>
             </>
           )}
-          <div className="pt-4 border-t">
+
+          <div className="pt-4 border-t border-gray-300 dark:border-gray-700">
             {user ? (
-              <button
-                onClick={handleLogout}
-                className="w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
-              >
-                Logout
-              </button>
+              <>
+                <div className="flex items-center space-x-3 mb-3">
+                  <img
+                    src={user.photoURL || '/default-avatar.png'}
+                    alt="Profile"
+                    className="w-10 h-10 rounded-full object-cover border-2 border-blue-500"
+                  />
+                  <span className="font-semibold">{user.displayName || 'User'}</span>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
+                >
+                  Logout
+                </button>
+              </>
             ) : (
               <>
                 <Link to="/login">
@@ -117,6 +140,11 @@ const Navbar = () => {
                 </Link>
               </>
             )}
+          </div>
+
+          {/* ✅ Theme Toggle for Mobile */}
+          <div className="pt-4 border-t border-gray-300 dark:border-gray-700">
+            <ThemeToggle />
           </div>
         </div>
       </div>

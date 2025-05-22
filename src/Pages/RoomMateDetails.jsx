@@ -1,11 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import { useAuth } from '../Contexts/AuthContext'; // ✅ Fixed import
+import { useAuth } from '../Contexts/AuthContext';
 
 const RoomMateDetails = () => {
   const { id } = useParams();
-  const { user } = useAuth(); // ✅ Correct usage
+  const { user } = useAuth();
   const [roommate, setRoommate] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -54,46 +54,56 @@ const RoomMateDetails = () => {
     }
   };
 
-  if (loading) return <p className="text-center mt-10 text-lg font-medium">Loading...</p>;
+  if (loading) {
+    return (
+      <div className="text-center mt-20 text-xl text-gray-600 font-semibold">
+        Loading roommate details...
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white shadow-xl rounded-2xl p-6">
+    <div className="max-w-4xl mx-auto mt-12 px-6 py-10 bg-white rounded-2xl shadow-lg">
       <img
         src={roommate.image || 'https://via.placeholder.com/600x300?text=No+Image'}
         alt={roommate.title}
-        className="w-full max-h-[300px] object-cover rounded-xl"
-
-        // className="w-full h-80 object-cover rounded-xl"
+        className="w-full h-[300px] object-cover rounded-xl shadow-md"
       />
 
-      <div className="mt-6">
-        <h2 className="text-3xl font-bold mb-2">{roommate.title}</h2>
-        <p className="text-gray-600 mb-2">📍 <strong>Location:</strong> {roommate.location}</p>
-        <p className="text-gray-600 mb-2">💸 <strong>Rent:</strong> {roommate.rent} ৳</p>
-        <p className="text-gray-600 mb-2">📞 <strong>Contact:</strong> {roommate.contact}</p>
-        <p className="text-gray-700 mt-4"><strong>Description:</strong> {roommate.description}</p>
+      <div className="mt-8">
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">{roommate.title}</h2>
+        <div className="space-y-2 text-gray-700 text-lg">
+          <p><strong>📍 Location:</strong> {roommate.location}</p>
+          <p><strong>💸 Rent:</strong> {roommate.rent} ৳</p>
+          <p><strong>📞 Contact:</strong> {roommate.contact}</p>
+        </div>
 
-       <div className='flex justify-between'>
-        <div>
-         <button
-          className="mt-6 px-5 py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-lg transition duration-300"
-          onClick={handleLike}
-        >
-          ❤️ Like
-        </button>
+        <div className="mt-6">
+          <p className="text-gray-700 leading-relaxed">
+            <strong>Description:</strong><br />
+            {roommate.description || "No description provided."}
+          </p>
+        </div>
 
-        <p className="mt-3 text-sm text-gray-600">
-          Total Likes: <strong>{roommate?.likes?.length || 0}</strong>
-        </p>
-       </div>
-        <Link to='/browse'>
-        <button
-          className="mt-4 ml-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition duration-300"
-        >
-          🔍 Go to Browse
-        </button>
-        </Link>
-       </div>
+        <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <button
+              onClick={handleLike}
+              className="bg-rose-500 hover:bg-rose-600 text-white px-5 py-2 rounded-lg transition duration-300 shadow"
+            >
+              ❤️ Like
+            </button>
+            <p className="mt-2 text-sm text-gray-600">
+              Total Likes: <strong>{roommate?.likes?.length || 0}</strong>
+            </p>
+          </div>
+
+          <Link to="/browse">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition duration-300 shadow">
+              🔍 Back to Browse
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
