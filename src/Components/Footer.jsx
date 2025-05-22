@@ -30,7 +30,7 @@ const Footer = () => {
           <h3 className="font-semibold mb-2">Follow Us</h3>
           <div className="flex justify-center md:justify-start gap-4 mt-2">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/share/1DsyU8WuRM/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-indigo-700 dark:text-white hover:text-indigo-500"
@@ -38,7 +38,7 @@ const Footer = () => {
               <FaFacebookF size={20} />
             </a>
             <a
-              href="https://github.com/mdraihanrana"
+              href="https://github.com/Raihan-143"
               target="_blank"
               rel="noopener noreferrer"
               className="text-indigo-700 dark:text-white hover:text-indigo-500"
@@ -46,7 +46,7 @@ const Footer = () => {
               <FaGithub size={20} />
             </a>
             <a
-              href="https://linkedin.com/in/mdraihanrana"
+              href="https://www.linkedin.com/in/md-raihan-hasan-rana-61962328a/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-indigo-700 dark:text-white hover:text-indigo-500"
