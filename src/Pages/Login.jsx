@@ -16,45 +16,45 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(form.email, form.password);
-      Swal.fire("সফল!", "আপনি সফলভাবে লগইন করেছেন", "success");
+      Swal.fire("success!", "You are successfully login", "success");
       navigate("/");
     } catch (error) {
-      Swal.fire("ত্রুটি!", error.message, "error");
+      Swal.fire("error!", error.message, "error");
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
       await googleLogin();
-      Swal.fire("সফল!", "Google লগইন সফল", "success");
+      Swal.fire("success!", "Google login successful!", "success");
       navigate("/");
     } catch (error) {
-      Swal.fire("ত্রুটি!", error.message, "error");
+      Swal.fire("error!", error.message, "error");
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-blue-200 flex justify-center items-center px-4">
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">লগইন করুন</h2>
+        <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">Login Now!</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <label className="label">ইমেইল</label>
+          <label className="label">Email</label>
           <input
             type="email"
             name="email"
             value={form.email}
             onChange={handleChange}
-            placeholder="আপনার ইমেইল"
+            placeholder="Your email"
             className="w-full px-4 py-2 border rounded-lg focus:outline-blue-500"
             required
           />
-          <label className="label">পাসওয়ার্ড</label>
+          <label className="label">Password</label>
           <input
             type="password"
             name="password"
             value={form.password}
             onChange={handleChange}
-            placeholder="পাসওয়ার্ড"
+            placeholder="password"
             className="w-full px-4 py-2 border rounded-lg focus:outline-blue-500"
             required
           />
@@ -62,18 +62,18 @@ const Login = () => {
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition duration-200"
           >
-            লগইন করুন
+            Login
           </button>
         </form>
 
         <div className="mt-4 text-center text-sm text-gray-600">
-          রেজিস্ট্রেশন করেননি?{" "}
+          Do not register?{" "}
           <Link to="/register" className="text-blue-600 hover:underline font-medium underline">
-            রেজিস্টার করুন
+           Register here
           </Link>
         </div>
 
-        <div className="mt-4 text-center text-gray-600">অথবা</div>
+        <div className="mt-4 text-center text-gray-600">OR</div>
 
         <button
           onClick={handleGoogleLogin}
@@ -88,7 +88,7 @@ const Login = () => {
               <path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path>
             </g>
           </svg>
-          Google দিয়ে লগইন করুন
+          Login with google
         </button>
       </div>
     </div>

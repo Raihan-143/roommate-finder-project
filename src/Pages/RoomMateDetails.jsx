@@ -91,7 +91,7 @@ const RoomMateDetails = () => {
         <div>
           <button
             onClick={handleLike}
-            className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-lg transition duration-300 shadow"
+            className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-lg transition duration-300 shadow cursor-pointer"
           >
             ❤️ Like
           </button>
@@ -101,7 +101,7 @@ const RoomMateDetails = () => {
         </div>
 
         <Link to="/browse">
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg transition duration-300 shadow">
+          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg transition duration-300 shadow cursor-pointer">
             🔙 Back to Browse
           </button>
         </Link>

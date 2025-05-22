@@ -26,21 +26,21 @@ const Navbar = () => {
             Roommate<span className="text-rose-500">Finder</span>
           </span>
         </Link>
-        
+
 
         <div className="hidden md:flex flex-1 justify-center space-x-6 text-gray-700 dark:text-gray-200 font-medium">
-          <Link to="/" className="flex items-center gap-1 hover:text-blue-600 dark:hover:text-blue-400">
+          <Link to="/" className="flex items-center gap-1 hover:text-indigo-700 dark:hover:text-blue-400">
             <Home size={18} /> Home
           </Link>
-          <Link to="/browse" className="flex items-center gap-1 hover:text-blue-600 dark:hover:text-blue-400">
+          <Link to="/browse" className="flex items-center gap-1 hover:text-indigo-700 dark:hover:text-blue-400">
             <Search size={18} /> Browse
           </Link>
           {user && (
             <>
-              <Link to="/add" className="flex items-center gap-1 hover:text-blue-600 dark:hover:text-blue-400">
-                <Plus size={18} /> Add
+              <Link to="/add" className="flex items-center gap-1 hover:text-indigo-700 dark:hover:text-blue-400">
+                <Plus size={18} /> Add-Listing
               </Link>
-              <Link to="/my-listings" className="flex items-center gap-1 hover:text-blue-600 dark:hover:text-blue-400">
+              <Link to="/my-listings" className="flex items-center gap-1 hover:text-indigo-700 dark:hover:text-blue-400">
                 <List size={18} /> My Listings
               </Link>
             </>
@@ -54,12 +54,12 @@ const Navbar = () => {
               <img
                 src={user.photoURL || '/default-avatar.png'}
                 alt="Profile"
-                className="w-9 h-9 rounded-full object-cover border-2 border-blue-500"
+                className="w-9 h-9 rounded-full object-cover border-2 border-indigo-700 cursor-pointer"
                 title={user.displayName || 'User'}
               />
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-lg"
+                className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-lg cursor-pointer"
               >
                 <LogOut size={16} /> Logout
               </button>
@@ -67,12 +67,12 @@ const Navbar = () => {
           ) : (
             <>
               <Link to="/login">
-                <button className="flex items-center gap-1 bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-lg">
+                <button className="flex items-center gap-1 bg-indigo-700 hover:bg-blue-600 text-white px-4 py-1 rounded-lg cursor-pointer">
                   <LogIn size={16} /> Login
                 </button>
               </Link>
               <Link to="/register">
-                <button className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded-lg">
+                <button className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded-lg cursor-pointer">
                   <UserPlus size={16} /> Register
                 </button>
               </Link>

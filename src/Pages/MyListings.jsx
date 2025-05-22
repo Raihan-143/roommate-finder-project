@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../Contexts/AuthContext";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import Lottie from "lottie-react";
+import noListData from "../assets/lottie/no-list.json";
 
 const MyListings = () => {
   const { user } = useAuth();
@@ -10,10 +12,10 @@ const MyListings = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/roommates/user?email=${user.email}`)
+      fetch(`http://localhost:3000/myroommates/user?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
-            console.log("Fetched listings:", data);
+          console.log("Fetched listings:", data);
           setListings(data);
           setLoading(false);
         })
@@ -23,8 +25,6 @@ const MyListings = () => {
         });
     }
   }, [user]);
-  console.log("Fetching listings for", user.email);
-
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -73,8 +73,11 @@ const MyListings = () => {
 
   if (listings.length === 0) {
     return (
-      <div className="text-center mt-20 text-lg text-gray-500 font-medium">
-        You have not added any roommate listings yet.
+      <div className="flex flex-col items-center justify-center mt-20 text-lg text-gray-500 font-medium">
+        <p className="mb-4">You have not added any roommate listings yet.</p>
+        <div className="w-64">
+          <Lottie animationData={noListData} loop={true} />
+        </div>
       </div>
     );
   }
@@ -98,17 +101,19 @@ const MyListings = () => {
               <p className="text-gray-600 mb-1">
                 <span className="font-medium">Rent:</span> {item.rent}৳
               </p>
-              <p className="text-gray-500 mt-3 text-sm line-clamp-3">{item.description || "No description provided."}</p>
+              <p className="text-gray-600 mt-3 text-sm line-clamp-3">
+               <span className="font-medium">Description:</span> {item.description || "No description provided."}
+              </p>
             </div>
             <div className="flex justify-between mt-6">
               <Link to={`/update/${item._id}`}>
-                <button className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 shadow-md">
+                <button className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 shadow-md cursor-pointer">
                   Update
                 </button>
               </Link>
               <button
                 onClick={() => handleDelete(item._id)}
-                className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition-colors duration-300 shadow-md"
+                className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition-colors duration-300 shadow-md cursor-po cursor-pointer"
               >
                 Delete
               </button>

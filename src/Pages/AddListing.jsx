@@ -61,8 +61,8 @@ const AddListing = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
-      <h2 className="text-2xl font-bold mb-4 text-center text-blue-600">Add a New Roommate Listing</h2>
+    <div className="max-w-2xl mx-auto mt-2 p-6 bg-white shadow-lg rounded-xl">
+      <h2 className="text-2xl font-bold mb-4 text-center text-indigo-700">Add a New Roommate Listing</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <label className="label">Title</label>
         <input type="text" name="title" placeholder="Title" value={formData.title} onChange={handleChange} required className="w-full p-2 border rounded" />
@@ -85,7 +85,7 @@ const AddListing = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`bg-blue-600 text-white px-4 py-2 rounded w-full ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
+          className={`bg-indigo-700 text-white px-4 py-2 cursor-pointer rounded w-full ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
         >
           {loading ? 'Submitting...' : 'Add Listing'}
         </button>
