@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../Contexts/AuthContext';
 import { Menu, X, Home, Search, Plus, List, LogIn, UserPlus, LogOut, UserCircle } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import ThemeToggleButton from './Custom';
+
+
+
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -23,7 +27,7 @@ const Navbar = () => {
             className="h-10 w-auto mr-2"
           />
           <span className="text-2xl font-bold text-indigo-700 dark:text-white">
-            Roommate<span className="text-rose-500">Finder</span>
+            RoomMate<span className="text-rose-500">Finder</span>
           </span>
         </Link>
 
@@ -48,7 +52,8 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center space-x-4">
-          <ThemeToggle />
+          <ThemeToggleButton></ThemeToggleButton>
+      
           {user ? (
             <>
               <img
