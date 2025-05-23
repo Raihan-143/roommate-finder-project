@@ -62,6 +62,8 @@ const RoomMateDetails = () => {
     );
   }
 
+  const hasLiked = roommate?.likes?.includes(user?.uid);
+
   return (
     <div className="max-w-5xl mx-auto mt-10 bg-white shadow-2xl rounded-3xl overflow-hidden dark:bg-gray-900 dark:shadow-gray-800">
       <div className="grid md:grid-cols-2">
@@ -78,7 +80,12 @@ const RoomMateDetails = () => {
             <ul className="space-y-2 text-gray-700 text-[17px] font-medium dark:text-gray-300">
               <li>📍 <strong>Location:</strong> {roommate.location}</li>
               <li>💸 <strong>Rent:</strong> {roommate.rent} ৳</li>
-              <li>📞 <strong>Contact:</strong> {roommate.contact}</li>
+              <li>
+                📞 <strong>Contact:</strong>{" "}
+                {hasLiked
+                  ? roommate.contact
+                  : <span className="text-red-500">Please like to see contact</span>}
+              </li>
             </ul>
 
             <div className="mt-4 text-gray-700 text-base leading-relaxed dark:text-gray-300">
@@ -96,7 +103,7 @@ const RoomMateDetails = () => {
                 ❤️ Like
               </button>
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Total Likes: <strong>{roommate?.likes?.length || 0}</strong>
+                {roommate.likes?.length || 0} people interested in
               </p>
             </div>
 
