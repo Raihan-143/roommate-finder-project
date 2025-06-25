@@ -40,7 +40,7 @@ A full-stack web application for finding and listing roommates with chat support
 ## 🖥️ Run Locally
 
 ```bash
-git clone https://github.com/your-username/roommate-finder.git
+git clone https://github.com/Raihan-143/roommate-finder.git
 cd roommate-finder
 npm install
 npm run dev
