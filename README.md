@@ -1,8 +1,12 @@
 # 🏠 Roommate Finder Website
+<p align="center">
+  <img src="./room.png" alt="Banner" width="100%" />
+</p>
+
 
 A full-stack web application for finding and listing roommates with chat support.
 
-🔗 **Live Link:** [roommatefinder.vercel.app](https://roommatefinder.vercel.app)
+🔗 **Live Link:** [[roommatefinder.vercel.app](https://roommatefinder.vercel.app)](https://roommate-finder-app-6340f.web.app/)
 
 ---
 
